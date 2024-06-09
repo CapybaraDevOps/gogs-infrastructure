@@ -17,7 +17,7 @@ metadata:
   namespace: ${kubernetes_namespace.awx.metadata[0].name}
 spec:
   service_type: nodeport
-  admin_user: admin
+  admin_user: ${var.awx_admin_username}
   admin_password_secret: ${kubernetes_secret.awx_admin_password.metadata[0].name}
   postgres_storage_class: ${var.storage_class}
   postgres_data_volume_init: true

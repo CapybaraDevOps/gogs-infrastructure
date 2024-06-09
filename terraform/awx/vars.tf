@@ -18,3 +18,8 @@ variable "storage_class" {
   default     = "premium-rwo"
 }
 
+variable "awx_admin_username" {
+  description = "AWX admin username"
+  default = "admin"
+}
+
