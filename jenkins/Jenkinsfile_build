@@ -3,6 +3,13 @@ pipeline {
      tools {
 		jfrog 'jfrog-cli'
 	}
+    parameters {
+        choice(name: 'ENV', choices: ['DEV', 'STAGE', 'PROD'], description: 'Deployment environment')
+        string(name: 'BUILDNAME', defaultValue: 'gogs', description: 'Build Name')
+    }
+    environment {
+        GOOGLE_CREDENTIALS = credentials('terraform_creds')
+    }
     stages {
         stage('Checkout') {
              steps {
@@ -71,6 +78,26 @@ pipeline {
             }
         }
         stage('Artifactory') {
+         steps {
+                script {
+                    def hash = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
+                    def buildName = "${params.ENV}-${params.BUILDNAME}-$BUILD_NUMBER-${hash}"
+
+                    def repo = ""
+                    if (params.ENV == 'DEV') {
+                        repo = 'gogs-dev-docker-local'
+                    } else if (params.ENV == 'STAGE') {
+                        repo = 'gogs-stage-docker-local'
+                    } else if (params.ENV == 'PROD') {
+                        repo = 'gogs-prod-docker-local'
+                    }
+
+                    docker.withRegistry("https://35.242.232.104", artifactory_docker_creds) {
+                        docker.image("gogs_docker_image").push("${repo}/${buildName}")
+                    }
+                    jf "rt bp"
+                }
+            }
         }
     }
     post {
