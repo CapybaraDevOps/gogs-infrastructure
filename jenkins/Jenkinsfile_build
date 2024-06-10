@@ -1,15 +1,58 @@
 pipeline {
     agent any
+     tools {
+		jfrog 'jfrog-cli'
+	}
     stages {
         stage('Checkout') {
+             steps {
+                script {
+                    git branch: 'main', credentialsId: 'gitcreds', url: 'git@github.com:CapybaraDevOps/gogs-infrastructure.git'
+                }
+            }
         }
         stage('Compile') {
+            steps {
+                script {
+                    sh '''
+                    cd gogs
+                    go build -o gogs
+                    '''
+                }
+            }
         }
         stage('Test') {
-        }
-        stage('Configuration') {
+            steps {
+                script {
+                    sh '''
+                    ./gogs web &
+                    sleep 10
+                    pkill gogs
+                    '''
+                }
+            }
         }
         stage('Build') {
+            steps {
+                script {
+                    sh '''
+                    go build -tags "pam cert" -o gogs
+                    '''
+                }
+            }
+        }
+        stage('Configuration') {
+             steps {
+                script {
+                    sh '''
+                    mkdir -p gogs/custom/conf
+                    cat <<EOT >> gogs/custom/conf/app.ini
+                    EOT
+                    '''
+                }
+            }
+        }
+        stage('Docker Image') {
         }
         stage('Artifactory') {
         }
