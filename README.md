@@ -1,1 +1,1 @@
-# gogs-infrastructure
+# Gogs Infrastructure
