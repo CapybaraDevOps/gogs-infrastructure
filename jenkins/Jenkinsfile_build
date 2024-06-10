@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+    stages {
+        stage('Checkout') {
+        }
+        stage('Compile') {
+        }
+        stage('Test') {
+        }
+        stage('Configuration') {
+        }
+        stage('Build') {
+        }
+        stage('Artifactory') {
+        }
+    }
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
