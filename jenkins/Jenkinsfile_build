@@ -64,24 +64,6 @@ pipeline {
                 }
             }
         }
-        stage('Docker Image') {
-              steps {
-                script {
-                    sh '''
-                    cat <<EOF > Dockerfile
-                    FROM golang:1:22.4-alpine
-                    RUN apk add --no-cache git pam-dev
-                    WORKDIR /app
-                    COPY . .
-                    RUN go build -tags "pam cert" -o gogs
-                    EXPOSE 3000
-                    CMD ["./gogs", "web"]
-                    EOF
-                    docker build -t gogs_docker_image .
-                    '''
-                }
-            }
-        }
         stage('Artifactory') {
          steps {
                 script {
