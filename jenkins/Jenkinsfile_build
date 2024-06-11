@@ -2,6 +2,7 @@ pipeline {
     agent any
      tools {
 		jfrog 'jfrog-cli'
+        go '1.22.4'
 	}
     parameters {
         choice(name: 'ENV', choices: ['DEV', 'STAGE', 'PROD'], description: 'Deployment environment')
@@ -22,6 +23,7 @@ pipeline {
             steps {
                 script {
                     sh '''
+                    git clone --depth 1 https://github.com/gogs/gogs.git gogs
                     cd gogs
                     go build -o gogs
                     '''
@@ -32,6 +34,7 @@ pipeline {
             steps {
                 script {
                     sh '''
+                    cd gogs
                     ./gogs web &
                     sleep 10
                     pkill gogs
@@ -43,6 +46,8 @@ pipeline {
             steps {
                 script {
                     sh '''
+                    cd gogs
+                    ls -la
                     go build -tags "pam cert" -o gogs
                     '''
                 }
@@ -64,7 +69,7 @@ pipeline {
                 script {
                     sh '''
                     cat <<EOF > Dockerfile
-                    FROM golang:1:18-alpine
+                    FROM golang:1:22.4-alpine
                     RUN apk add --no-cache git pam-dev
                     WORKDIR /app
                     COPY . .
