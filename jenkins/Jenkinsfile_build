@@ -27,18 +27,8 @@ pipeline {
                     cd gogs
                     go build -o gogs
                     ls -la
-                    '''
-                }
-            }
-        }
-        stage('Test') {
-            steps {
-                script {
-                    sh '''
-                    cd gogs
-                    ./gogs web &
-                    sleep 10
-                    pkill gogs
+                    cat Dockerfile
+                    docker build -t gogs_docker_image:${env.BUILD_NUMBER} .
                     '''
                 }
             }
@@ -47,7 +37,10 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    docker build -t gogs_docker_image:${env.BUILD_NUMBER} .
+                    cd gogs
+                    ls -la
+                    cat Dockerfile
+                    
                     ls -la
                     '''
                 }
