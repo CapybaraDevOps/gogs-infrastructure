@@ -26,6 +26,7 @@ pipeline {
                     git clone --depth 1 https://github.com/gogs/gogs.git gogs
                     cd gogs
                     go build -o gogs
+                    ls -la
                     '''
                 }
             }
@@ -42,24 +43,12 @@ pipeline {
                 }
             }
         }
-        stage('Build') {
+        stage('Docker') {
             steps {
                 script {
                     sh '''
-                    cd gogs
+                    docker build -t gogs_docker_image:${env.BUILD_NUMBER} .
                     ls -la
-                    go build -tags "pam cert" -o gogs
-                    '''
-                }
-            }
-        }
-        stage('Configuration') {
-             steps {
-                script {
-                    sh '''
-                    mkdir -p gogs/custom/conf
-                    cat <<EOT >> gogs/custom/conf/app.ini
-                    EOT
                     '''
                 }
             }
@@ -80,7 +69,7 @@ pipeline {
                     }
 
                     docker.withRegistry("https://35.242.232.104", artifactory_docker_creds) {
-                        docker.image("gogs_docker_image").push("${repo}/${buildName}")
+                        docker.image("gogs_docker_image:${env.BUILD_NUMBER}").push("${repo}/${buildName}")
                     }
                     jf "rt bp"
                 }
