@@ -54,7 +54,7 @@ service:
     - name: MYSQL_USER
       value: ${GOGS_DB_USER}
     - name: MYSQL_PASSWORD
-      value: ${GOGS_DB_NAME}
+      value: ${GOGS_DB_PASS}
 
 
 ingress:
