@@ -15,7 +15,7 @@ resource "google_container_node_pool" "gogs_node_pool" {
   location   = google_container_cluster.gogs_cluster.location
   autoscaling {
     min_node_count = 1
-    max_node_count = 1
+    max_node_count = 2
   }
   node_config {
     preemptible  = true
