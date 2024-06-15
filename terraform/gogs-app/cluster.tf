@@ -1,6 +1,6 @@
 resource "google_container_cluster" "gogs_cluster" {
   name                     = "${var.env}-${var.region}-gogs-cluster"
-  location                 = var.region
+  location                 = var.zone
   enable_l4_ilb_subsetting = true
   initial_node_count       = 1
   network                  = module.network.network_name
