@@ -122,10 +122,10 @@ affinity: {}
 
 mysql:
   auth:
-    username: "gogs"
-    password: "gogs"
+    username: "${GOGS_DB_USER}"
+    password: "${GOGS_DB_PASS}"
     createDatabase: true
-    database: "gogs"
+    database: "${GOGS_DB_NAME}"
   primary:
     service:
       type: NodePort
