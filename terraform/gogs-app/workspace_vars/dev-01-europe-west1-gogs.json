@@ -4,5 +4,5 @@
     "project": "capybarageocity",
     "zone": "europe-west1-c",
     "machine_type": "e2-medium",
-    "helm_repo": "oci://docker.capybara.pp.ua:443/artifactory/dev-helm-gogs/"
+    "helm_repo": "https://docker.capybara.pp.ua:443/artifactory/dev-helm-gogs/"
 }
