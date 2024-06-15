@@ -33,8 +33,14 @@ variable "helm_repo" {
   description = "Link to your helm repository"
   type = string
 }
-variable "jfrog_api_key" {
-  description = "Jfrog API key"
+variable "jfrog_username" {
+  description = "Jfrog username"
+  type = string
+  sensitive = true
+  default = "jenkins"
+}
+variable "jfrog_password" {
+  description = "Jfrog password"
   type = string
   sensitive = true
 }
