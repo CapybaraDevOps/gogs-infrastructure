@@ -19,7 +19,7 @@ resource "google_container_node_pool" "gogs_node_pool" {
   }
   node_config {
     preemptible  = true
-    machine_type = "e2-medium"
+    machine_type = var.machine_type
     disk_size_gb = 10
 
     oauth_scopes = [
