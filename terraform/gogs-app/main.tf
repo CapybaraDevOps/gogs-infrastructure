@@ -27,6 +27,11 @@ provider "helm" {
     host                   = "https://${google_container_cluster.my_cluster.endpoint}"
     cluster_ca_certificate = base64decode(google_container_cluster.my_cluster.master_auth[0].cluster_ca_certificate)
   }
+  registry {
+    url      = var.helm_repo
+    username = var.jfrog_username
+    password = var.jfrog_password
+  }
 }
 
 provider "google" {
