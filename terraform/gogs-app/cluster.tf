@@ -33,7 +33,6 @@ resource "helm_release" "gogs-app" {
   repository = var.helm_repo
   chart      = "gogsapp"
   namespace  = "gogs-app"
-  version    = "0.1.0"
   depends_on = [kubernetes_namespace.gogs-app]
   timeout    = 900
 }
