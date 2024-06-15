@@ -23,8 +23,11 @@ resource "kubernetes_namespace" "gogs-app" {
     labels = {
       namespace = "gogs-app"
     }
-
     name = "gogs-app"
+  }
+  depends_on = [google_container_cluster.my_cluster]
+  timeouts {
+    delete = "1m"
   }
 }
 
