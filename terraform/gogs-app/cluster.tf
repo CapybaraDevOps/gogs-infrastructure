@@ -35,5 +35,6 @@ resource "helm_release" "gogs-app" {
   namespace  = "gogs-app"
   depends_on = [kubernetes_namespace.gogs-app]
   timeout    = 900
+  repository_password = var.jfrog_api_key
 }
 
