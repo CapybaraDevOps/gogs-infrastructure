@@ -11,4 +11,5 @@ plan: init
 apply: init
 	terraform apply -var-file=./workspace_vars/$(GOGS_ENV).json -auto-approve -no-color
 destroy: init
+	terraform destroy -var-file=./workspace_vars/$(GOGS_ENV).json --target google_container_cluster.my_cluster -auto-approve -no-color
 	terraform destroy -var-file=./workspace_vars/$(GOGS_ENV).json -auto-approve -no-color
