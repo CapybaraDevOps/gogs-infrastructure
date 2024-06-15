@@ -1,4 +1,4 @@
-GOGS_ENV?=dev-01-europe-west1-gogs
+GOGS_ENV?=dev-01-europe-west4-gogs
 
 init:
 	terraform init -no-color

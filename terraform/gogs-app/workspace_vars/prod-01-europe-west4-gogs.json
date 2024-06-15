@@ -1,8 +1,8 @@
 {
     "env": "prod-01",
-    "region": "europe-west1",
+    "region": "europe-west4",
     "project": "capybarageocity",
-    "zone": "europe-west1-c",
+    "zone": "europe-west4-c",
     "machine_type": "e2-medium",
     "helm_repo": "https://docker.capybara.pp.ua/artifactory/api/helm/dev-helm-gogs"
 }
