@@ -1,0 +1,8 @@
+{
+    "env": "stage-01",
+    "region": "europe-west1",
+    "project": "capybarageocity",
+    "zone": "europe-west1-c",
+    "machine_type": "e2-medium",
+    "helm_repo": "$HELM_REPO"
+}

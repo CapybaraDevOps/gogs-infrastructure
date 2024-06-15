@@ -1,16 +1,17 @@
 module "network" {
-  source = "./modules/network"
+  source = "../modules/network"
+  region = var.region
 }
 
 resource "google_container_cluster" "my_cluster" {
-  name     = "gogs-cluster"
-  location = "europe-west3"
+  name                     = "gogs-cluster"
+  location                 = var.region
   enable_autopilot         = true
   enable_l4_ilb_subsetting = true
-  initial_node_count = 1
-  network    = module.network.network_name
-  subnetwork = module.network.subnetwork_name
-  deletion_protection = false
+  initial_node_count       = 1
+  network                  = module.network.network_name
+  subnetwork               = module.network.subnetwork_name
+  deletion_protection      = false
 }
 
 resource "kubernetes_namespace" "gogs-app" {
@@ -29,11 +30,11 @@ resource "kubernetes_namespace" "gogs-app" {
 
 resource "helm_release" "gogs-app" {
   name       = "gogs-app"
-  repository = "https://olkabolkagoryashenko.github.io/gogs-chart/"
+  repository = var.helm_repo
   chart      = "gogsapp"
-  namespace = "gogs-app"
+  namespace  = "gogs-app"
   version    = "0.1.0"
-  depends_on = [ kubernetes_namespace.gogs-app ]
+  depends_on = [kubernetes_namespace.gogs-app]
   timeout    = 900
 }
 

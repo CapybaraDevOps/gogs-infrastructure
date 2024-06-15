@@ -12,9 +12,9 @@ resource "google_service_networking_connection" "private_vpc_connection" {
   network                 = google_compute_network.default.id
   service                 = "servicenetworking.googleapis.com"
   reserved_peering_ranges = [google_compute_global_address.private_ip_address.name]
-  depends_on = [ google_compute_global_address.private_ip_address ]
+  depends_on              = [google_compute_global_address.private_ip_address]
   lifecycle {
     prevent_destroy = false
-    ignore_changes = [reserved_peering_ranges]
+    ignore_changes  = [reserved_peering_ranges]
   }
 }
