@@ -10,14 +10,17 @@ resource "helm_release" "gogs-app" {
 
   set {
     name = "image.registry"
-    value = "docker.io"
+    value = var.jfrog_registry
   }
 
   set {
     name = "image.repository"
-    value = "gogs/gogs"
+    value = var.jfrog_repository
   }
-
+  set {
+    name = "image.tag"
+    value = var.gogs_build_tag
+  }
   set {
     name = "service.env[0].name"
     value = "MYSQL_DATABASE"

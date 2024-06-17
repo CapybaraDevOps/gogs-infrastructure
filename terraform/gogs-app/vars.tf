@@ -44,6 +44,11 @@ variable "jfrog_password" {
   type = string
   sensitive = true
 }
+variable "jfrog_email" {
+  description = "Jfrog email used in K8s docker auth"
+  type = string
+  default = "admin@capybara.pp.ua"
+}
 variable "mysql_username" {
   description = "MySQL username"
   type = string
@@ -53,4 +58,16 @@ variable "mysql_db_name" {
   description = "MySQL Database Name"
   type = string
   default = "gogs"
+}
+variable "jfrog_registry" {
+  description = "JFrog Docker registry URL"
+  type = string
+}
+variable "jfrog_repository" {
+  description = "JFrog Docker repository name"
+  type = string
+}
+variable "gogs_build_tag" {
+  description = "Gogs image tag to pull"
+  type = string
 }
