@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
-COPY /gogs /app/gogs
+COPY gogs /app/gogs
 
 EXPOSE 22 3000
 
