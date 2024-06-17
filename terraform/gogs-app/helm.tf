@@ -8,10 +8,10 @@ resource "helm_release" "gogs-app" {
   repository_username = var.jfrog_username
   repository_password = var.jfrog_password
 
-  //set {
-  //  name = "image.registry"
-  //  value = "${var.jfrog_registry}"
-  //}
+  set {
+    name = "image.registry"
+    value = "${var.jfrog_registry}"
+  }
 
   set {
     name = "image.repository"
