@@ -9,6 +9,9 @@ image:
   registry: docker.io
   repository: gogs/gogs
   pullPolicy: IfNotPresent
+  digest: ""
+  rootless: false
+  fullOverride: ""
   # Overrides the image tag whose default is the chart appVersion.
   tag: latest
 

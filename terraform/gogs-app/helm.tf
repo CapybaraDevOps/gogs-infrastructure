@@ -10,7 +10,7 @@ resource "helm_release" "gogs-app" {
 
   set {
     name = "image.registry"
-    value = var.jfrog_registry
+    value = "${var.jfrog_registry}"
   }
 
   set {
@@ -19,7 +19,7 @@ resource "helm_release" "gogs-app" {
   }
   set {
     name = "image.tag"
-    value = var.gogs_build_tag
+    value = "${var.gogs_build_tag}"
   }
   set {
     name = "service.env[0].name"
