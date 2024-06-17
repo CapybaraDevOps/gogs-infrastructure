@@ -23,8 +23,8 @@ variable "minNode" {
   default     = "1"
 }
 variable "maxNode" {
-  description = "maximum Node Count"
-  default     = "2"
+  description = "Maximum Node Count"
+  default     = "3"
 }
 variable "machine_type" {
   description = "Node Instance machine type"
@@ -43,4 +43,14 @@ variable "jfrog_password" {
   description = "Jfrog password"
   type = string
   sensitive = true
+}
+variable "mysql_username" {
+  description = "MySQL username"
+  type = string
+  default = "gogs"
+}
+variable "mysql_db_name" {
+  description = "MySQL Database Name"
+  type = string
+  default = "gogs"
 }
