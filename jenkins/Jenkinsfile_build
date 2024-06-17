@@ -6,11 +6,12 @@ pipeline {
         dockerTool 'docker'
 	}
     parameters {
-        choice(name: 'ENV', choices: ['DEV', 'STAGE', 'PROD'], description: 'Deployment environment')
+        choice(name: 'ENV', choices: ['dev', 'stage', 'prod'], description: 'Deployment environment')
         string(name: 'BUILDNAME', defaultValue: 'gogs', description: 'Build Name')
     }
     environment {
-        ARTIFACTORY_URL = 'https://docker.capybara.pp.ua:443/artifactory'
+        ARTIFACTORY_URL = credentials('docker-registry-url')
+        ARTIFACTORY_DOMAIN = credentials('docker-registry-domain')
     }
     stages {
         stage('Checkout') {
@@ -24,14 +25,13 @@ pipeline {
             steps {
                 script {
                     sh '''
-                    docker --version
                     git clone --depth 1 https://github.com/gogs/gogs.git gogs
-                    ls -la
                     cd gogs
-                    ls -la
                     go build -o gogs
-                    ls -la
-                    docker build -f /var/lib/jenkins/workspace/GOGS_Build/jenkins/Dockerfile -t gogs:${BUILD_NUMBER} .
+
+                    mv /var/lib/jenkins/workspace/GOGS_Build/jenkins/Dockerfile /var/lib/jenkins/workspace/GOGS_Build/
+                    cd /var/lib/jenkins/workspace/GOGS_Build/
+                    docker build -t gogs:${BUILD_NUMBER} .
                     '''
                 }
             }
@@ -39,28 +39,13 @@ pipeline {
         stage('Docker Push') {
          steps {
                 script {
+                    def hash = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
 
-                    def repo = ''
-                    switch (params.ENV) {
-                        case 'dev':
-                            repo = "${env.ARTIFACTORY_URL}/dev-gogs-go-local"
-                            break
-                        case 'stage':
-                            repo = "${env.ARTIFACTORY_URL}/stage-gogs-go-local"
-                            break
-                        case 'prod':
-                            repo = "${env.ARTIFACTORY_URL}/prod-gogs-go-local"
-                            break
-                        default:
-                            error "Invalid repository selection"
-                    }
-
-                    def imageTag = "${repo}/gogs:$BUILD_NUMBER"
+                    def imageTag = "${env.ARTIFACTORY_URL}/${params.ENV}-${params.BUILDNAME}-go-local/${params.BUILDNAME}:$BUILD_NUMBER-${hash}"
                     sh "docker tag gogs:$BUILD_NUMBER ${imageTag}"
                     
-                    
                     withCredentials([usernamePassword(credentialsId: 'dcr-p-creds', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                        sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD https://docker.capybara.pp.ua"
+                        sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ${env.ARTIFACTORY_DOMAIN}"
                         sh "docker push ${imageTag}"
                         sh "docker logout ${env.ARTIFACTORY_URL}"
                     }
