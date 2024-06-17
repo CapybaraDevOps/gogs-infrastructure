@@ -21,10 +21,10 @@ resource "helm_release" "gogs-app" {
   set_list {
     name = "service.env"
     value = [
-      {name = "MYSQL_DATABASE", value = "${var.mysql_db_name}"},
-      {name = "MYSQL_USER", value = "${var.mysql_username}"},
-      {name = "MYSQL_ROOT_PASSWORD", value = "${kubernetes_secret.gogs_admin_password.data.password}"},
-      {name = "MYSQL_PASSWORD", value = "${kubernetes_secret.gogs_admin_password.data.password}"}
+      {name = "MYSQL_DATABASE", value = var.mysql_db_name},
+      {name = "MYSQL_USER", value = var.mysql_username},
+      {name = "MYSQL_ROOT_PASSWORD", value = kubernetes_secret.gogs_admin_password.data.password},
+      {name = "MYSQL_PASSWORD", value = kubernetes_secret.gogs_admin_password.data.password}
     ]
   }
 
