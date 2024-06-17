@@ -5,7 +5,7 @@ resource "google_compute_network" "default" {
 
 resource "google_compute_subnetwork" "default" {
   name                     = "awx-subnetwork"
-  ip_cidr_range            = "10.156.0.0/20"
+  ip_cidr_range            = "10.154.0.0/20"
   region                   = var.region
   private_ip_google_access = true
   network                  = google_compute_network.default.id
@@ -25,6 +25,8 @@ resource "google_compute_firewall" "default" {
 resource "google_container_cluster" "awx_cluster" {
   name     = "awx-cluster"
   location = var.zone
+  network = google_compute_network.default.id
+  subnetwork = google_compute_subnetwork.default.id
 
   initial_node_count       = 1
   remove_default_node_pool = true

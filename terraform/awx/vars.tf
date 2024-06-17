@@ -20,6 +20,6 @@ variable "storage_class" {
 
 variable "awx_admin_username" {
   description = "AWX admin username"
-  default = "admin"
+  default     = "admin"
 }
 
