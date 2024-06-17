@@ -21,8 +21,8 @@ resource "google_secret_manager_secret_version" "gogs_password_version" {
 
 resource "kubernetes_secret" "gogs_admin_password" {
   metadata {
-    name      = "gogs-admin-password"
-    namespace = kubernetes_namespace.gogs.metadata[0].name
+    name      = "${var.env}-gogs-admin-password"
+    namespace = kubernetes_namespace.gogs-app.metadata[0].name
   }
 
   data = {
