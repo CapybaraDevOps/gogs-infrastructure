@@ -16,7 +16,7 @@ pipeline {
         stage('Checkout') {
              steps {
                 script {
-                    git branch: 'jira-73-configure-gogs-helm-chart-for-multiple-environment-deployments', credentialsId: 'gitcreds', url: 'git@github.com:CapybaraDevOps/gogs-infrastructure.git'
+                    git branch: 'main', credentialsId: 'gitcreds', url: 'git@github.com:CapybaraDevOps/gogs-infrastructure.git'
                 }
             }
         }
