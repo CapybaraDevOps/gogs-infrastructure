@@ -46,11 +46,11 @@ variable "jfrog_password" {
 }
 variable "mysql_username" {
   description = "MySQL username"
-  type = any
+  type = string
   default = "gogs"
 }
 variable "mysql_db_name" {
   description = "MySQL Database Name"
-  type = any
+  type = string
   default = "gogs"
 }
