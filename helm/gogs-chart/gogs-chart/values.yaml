@@ -6,7 +6,7 @@ replicaCount: 2
 namespace: "gogs-app"
 
 image:
-  registry: docker.io
+  registry: docker.capybara.pp.ua
   repository: gogs/gogs
   pullPolicy: IfNotPresent
   digest: ""
