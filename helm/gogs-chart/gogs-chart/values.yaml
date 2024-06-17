@@ -6,7 +6,7 @@ replicaCount: 2
 namespace: "gogs-app"
 
 image:
-  registry: docker.capybara.pp.ua
+  registry: "docker.capybara.pp.ua"
   repository: gogs/gogs
   pullPolicy: IfNotPresent
   digest: ""
@@ -14,7 +14,6 @@ image:
   fullOverride: ""
   # Overrides the image tag whose default is the chart appVersion.
   tag: latest
-
 imagePullSecrets:
   - name: jfrogcred
 nameOverride: ""
