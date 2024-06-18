@@ -31,7 +31,7 @@ pipeline {
 
                     mv ../jenkins/Dockerfile ../
                     cd ..
-                    docker build -t gogs:${BUILD_NUMBER} .
+                    docker build -t ${params.BUILDNAME}:${BUILD_NUMBER} .
                     '''
                 }
             }
@@ -42,7 +42,7 @@ pipeline {
                     def hash = sh(script: "git rev-parse --short HEAD", returnStdout: true).trim()
 
                     def imageTag = "${env.ARTIFACTORY_URL}/${params.ENV}-${params.BUILDNAME}-go-local/${params.BUILDNAME}:$BUILD_NUMBER-${hash}"
-                    sh "docker tag gogs:$BUILD_NUMBER ${imageTag}"
+                    sh "docker tag ${params.BUILDNAME}:$BUILD_NUMBER ${imageTag}"
                     
                     withCredentials([usernamePassword(credentialsId: 'dcr-p-creds', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                         sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ${env.ARTIFACTORY_DOMAIN}"
