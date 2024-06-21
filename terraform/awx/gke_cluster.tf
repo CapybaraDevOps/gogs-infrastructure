@@ -23,9 +23,9 @@ resource "google_compute_firewall" "default" {
 }
 
 resource "google_container_cluster" "awx_cluster" {
-  name     = "awx-cluster"
-  location = var.zone
-  network = google_compute_network.default.id
+  name       = "awx-cluster"
+  location   = var.zone
+  network    = google_compute_network.default.id
   subnetwork = google_compute_subnetwork.default.id
 
   initial_node_count       = 1
