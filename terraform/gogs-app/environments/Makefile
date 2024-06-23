@@ -1,3 +1,5 @@
+GOGS_ENV?=dev-01-europe-west4-gogs
+
 init:
 	cd ${GOGS_ENV}/gogs
 	terragrunt init
