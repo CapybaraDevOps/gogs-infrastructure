@@ -37,7 +37,7 @@ locals {
 
 resource "kubernetes_secret" "gogs_https_cert_key" {
   metadata {
-    name = "gogs-dev-tls"
+    name = "${var.env}-gogs-tls"
     namespace = kubernetes_namespace.gogs-app.metadata[0].name  # 
   }
 
