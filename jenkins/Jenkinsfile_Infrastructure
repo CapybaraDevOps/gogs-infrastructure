@@ -34,7 +34,7 @@ pipeline {
                         env.TF_VAR_gogs_build_tag = "${JFROG_IMAGE_TAG}"
                     }
                 }
-			    withCredentials([file(credentialsId: 'terraform-gogs', variable: 'GOOGLE_CREDENTIALS')]) {
+			    withCredentials([file(credentialsId: 'GCP-SA-'${params.ENV}, variable: 'GOOGLE_CREDENTIALS')]) {
 			        dir('terraform/gogs-app') {
 			            sh 'make plan'
 			        }
@@ -43,7 +43,7 @@ pipeline {
 		}
 		stage('Approve'){
 			steps {
-			    withCredentials([file(credentialsId: 'terraform-gogs', variable: 'GOOGLE_CREDENTIALS')]) {
+			    withCredentials([file(credentialsId: 'GCP-SA-'${params.ENV}, variable: 'GOOGLE_CREDENTIALS')]) {
 			        dir('terraform/gogs-app') {
 			            sh 'make apply'
 			        }
