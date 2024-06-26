@@ -16,7 +16,7 @@ pipeline {
     stages {
         stage('Checkout') { 
             steps {
-                git branch: 'main', url: "git@github.com:CapybaraDevOps/gogs-infrastructure.git", credentialsId: 'gitcreds'
+                git branch: 'jira-82-https-for-gogs', url: "git@github.com:CapybaraDevOps/gogs-infrastructure.git", credentialsId: 'gitcreds'
             }
         }
         stage('Init and Plan'){
