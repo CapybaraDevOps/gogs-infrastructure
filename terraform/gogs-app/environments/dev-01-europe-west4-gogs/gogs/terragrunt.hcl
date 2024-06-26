@@ -25,7 +25,7 @@ include {
 inputs = {
     env = "dev-01"
     region = "europe-west4"
-    project = "kuberproject-425010" 
+    project = "capybara-dev-42069" 
     zone = "europe-west4-c"
     machine_type = "e2-medium"
     helm_repo = "https://docker.capybara.pp.ua/artifactory/api/helm/helm-gogs-local"
