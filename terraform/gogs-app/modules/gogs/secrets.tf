@@ -29,3 +29,22 @@ resource "kubernetes_secret" "gogs_admin_password" {
     password = google_secret_manager_secret_version.gogs_password_version.secret_data
   }
 }
+
+locals {
+  tls_cert = file("certificate.crt")
+  tls_key  = file("private.key")
+}
+
+resource "kubernetes_secret" "gogs_https_cert_key" {
+  metadata {
+    name = "gogs-dev-tls"
+    namespace = kubernetes_namespace.gogs-app.metadata[0].name  # 
+  }
+
+  data = {
+    "tls.crt" = base64encode(local.tls_cert)
+    "tls.key" = base64encode(local.tls_key)
+  }
+
+  type = "kubernetes.io/tls"
+}
