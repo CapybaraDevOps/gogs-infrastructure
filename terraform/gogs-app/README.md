@@ -1,19 +1,19 @@
-## Gogs application Terraform Deployment
-*Use this Terraform module to deploy GKE cluster with Gogs application.*
+## Gogs application Terragrunt Deployment
+*Use this Terragrunt code to deploy GKE cluster with Gogs application.*
 Please note that you **must be** authorized with your **Google Service Account**.
 #### Usage
-1. Change variable ***project*** default in **vars.tf** to your project id
-**All necessary variables passed in Jenkins pipeline**
+1. Set variable GOGS_ENV to desired environment name (environments folder must contain folder with the same name).
+**All necessary variables must be passed in Jenkins pipeline**
 
-2. Edit bucket name in ***backend.conf*** to your bucket name. 
+2. Change settings in ``terragrunt.hcl`` Create bucket by using ``terragrunt apply`` in **tf_state** folder 
 *(This bucket will store the Terraform state)*
 
-3. Init Terraform with backend config
+3. Init Terragrunt with backend config
 ``
 make init
 ``
 
-4. Apply Terraform configuration
+4. Apply Terragrunt configuration
 ``
 make apply
 ``
