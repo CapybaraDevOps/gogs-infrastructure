@@ -1,5 +1,7 @@
 terraform {
   backend "gcs" {
+    bucket = "stage-01-us-central1-awx-tf-state"
+    prefix = "terraform/awx"
   }
   required_version = "~> 1.8.0"
   required_providers {

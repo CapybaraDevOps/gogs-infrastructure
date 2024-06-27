@@ -1,16 +1,13 @@
 variable "region" {
   description = "Region to deploy"
-  default     = "europe-west2"
 }
 
 variable "zone" {
   description = "Zone to deploy"
-  default     = "europe-west2-a"
 }
 
 variable "project" {
   description = "Project Id"
-  default     = "capybarageocity"
 }
 
 variable "storage_class" {
@@ -23,3 +20,12 @@ variable "awx_admin_username" {
   default     = "admin"
 }
 
+variable "env" {
+  description = "The Working environment"
+  type        = string
+}
+
+variable "app" {
+  description = "The application name"
+  type        = string
+}
