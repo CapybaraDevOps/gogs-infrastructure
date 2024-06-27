@@ -9,7 +9,7 @@ pipeline {
 		choice(name: 'REGION', choices: ['europe'], description: 'Select the region')
         choice(name: 'ZONE', choices: ['west4'], description: 'Select the zone')
         string(name: 'PROJECT_NAME', defaultValue: 'gogs', description: 'Project name')
-        string(name: 'JFROG_REGISTRY', defaultValue: 'docker.capybara.pp.ua', description: 'Jfrog registry domain')
+        string(name: 'JFROG_REGISTRY', defaultValue: 'https://docker.capybara.pp.ua', description: 'Jfrog registry domain')
         choice(name: 'JFROG_REPOSITORY', choices: ['dev-gogs-go-local/gogs', 'stage-gogs-go-local/gogs', 'prod-gogs-go-local/gogs'] , description: 'Jfrog registry domain')
         string(name: 'JFROG_IMAGE_TAG', defaultValue: 'latest', description: 'Gogs image tag')
     }
@@ -34,7 +34,7 @@ pipeline {
                         env.TF_VAR_gogs_build_tag = "${JFROG_IMAGE_TAG}"
                     }
                 }
-			    withCredentials([file(credentialsId: "GCP-SA-${params.ENV}", variable: 'GOOGLE_CREDENTIALS')]) {
+			    withCredentials([file(credentialsId: "GCP-SA-${params.ENV}-1", variable: 'GOOGLE_CREDENTIALS')]) {
 			        dir('terraform/gogs-app/environments') {
                         echo "GCP-SA-${params.ENV}"
 			            sh 'make plan'
@@ -44,7 +44,7 @@ pipeline {
 		}
 		stage('Approve'){
 			steps {
-			    withCredentials([file(credentialsId: "GCP-SA-${params.ENV}", variable: 'GOOGLE_CREDENTIALS')]) {
+			    withCredentials([file(credentialsId: "GCP-SA-${params.ENV}-1", variable: 'GOOGLE_CREDENTIALS')]) {
 			        dir('terraform/gogs-app/environments') {
 			            sh 'make apply'
 			        }
