@@ -63,7 +63,7 @@ service:
 ingress:
   enabled: true
   className: "gce"
-  annotations: {}
+  annotations: 
     kubernetes.io/ingress.global-static-ip-name: "our-static-IP-name"
     networking.gke.io/managed-certificates: "gogs-dev"
     #networking.gke.io/managed-certificates: "example-certificate"
