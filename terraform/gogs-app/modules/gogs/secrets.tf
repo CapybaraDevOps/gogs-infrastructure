@@ -32,12 +32,12 @@ resource "kubernetes_secret" "gogs_admin_password" {
 
 data "google_secret_manager_secret_version" "tls_cert" {
   secret = "${var.env}-gogs-cert"  
-  version = "1"
+  version = "latest"
 }
 
 data "google_secret_manager_secret_version" "tls_key" {
   secret = "${var.env}-gogs-key"  
-  version = "1"
+  version = "latest"
 }
 
 resource "kubernetes_secret" "gogs_https_cert_key" {
@@ -47,8 +47,8 @@ resource "kubernetes_secret" "gogs_https_cert_key" {
   }
 
   data = {
-    "tls.crt" = base64decode(data.google_secret_manager_secret_version.tls_cert.secret_data)
-    "tls.key" = base64decode(data.google_secret_manager_secret_version.tls_key.secret_data)
+    "tls.crt" = base64encode(data.google_secret_manager_secret_version.tls_cert.secret_data)
+    "tls.key" = base64encode(data.google_secret_manager_secret_version.tls_key.secret_data)
   }
 
   type = "kubernetes.io/tls"
