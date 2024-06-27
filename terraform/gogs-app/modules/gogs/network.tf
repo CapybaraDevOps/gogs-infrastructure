@@ -12,6 +12,6 @@ resource "google_compute_subnetwork" "gogs-subnetwork" {
 }
 
 resource "google_compute_address" "ip_address" {
-  name = "our-static-IP-name"
+  name = "ip-address"
   address_type = "EXTERNAL"
 }
