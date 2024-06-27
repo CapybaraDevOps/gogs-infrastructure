@@ -36,6 +36,7 @@ pipeline {
                 }
 			    withCredentials([file(credentialsId: "GCP-SA-${params.ENV}", variable: 'GOOGLE_CREDENTIALS')]) {
 			        dir('terraform/gogs-app/environments') {
+                        echo "GCP-SA-${params.ENV}"
 			            sh 'make plan'
 			        }
 			    }
