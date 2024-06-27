@@ -11,3 +11,4 @@
 terraform/gogs-app/modules/gogs/certificate.crt
 terraform/gogs-app/modules/gogs/private.key
 terraform/gogs-app/modules/gogs/capybara-dev-42069-ea08a9adf12d.json
+terraform/gogs-app/environments/backend.tf
