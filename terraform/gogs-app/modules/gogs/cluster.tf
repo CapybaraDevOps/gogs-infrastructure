@@ -3,8 +3,8 @@ resource "google_container_cluster" "gogs_cluster" {
   location                 = var.zone
   enable_l4_ilb_subsetting = true
   initial_node_count       = 1
-  network                  = module.network.network_name
-  subnetwork               = module.network.subnetwork_name
+  network                  = google_compute_network.gogs-network.name
+  subnetwork               = google_compute_subnetwork.gogs-subnetwork.name
   deletion_protection      = false
   remove_default_node_pool = true
 }

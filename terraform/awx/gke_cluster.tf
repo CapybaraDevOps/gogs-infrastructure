@@ -31,6 +31,10 @@ resource "google_container_cluster" "awx_cluster" {
   initial_node_count       = 1
   remove_default_node_pool = true
   deletion_protection      = false
+
+  lifecycle {
+    ignore_changes = all
+  }
 }
 
 resource "google_container_node_pool" "awx_node_pool" {
