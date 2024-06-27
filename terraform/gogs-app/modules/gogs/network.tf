@@ -10,3 +10,8 @@ resource "google_compute_subnetwork" "gogs-subnetwork" {
   private_ip_google_access = true
   network                  = google_compute_network.gogs-network.id
 }
+
+resource "google_compute_address" "ip_address" {
+  name = "our-static-IP-name"
+  address_type = "EXTERNAL"
+}
