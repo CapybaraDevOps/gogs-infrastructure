@@ -28,5 +28,5 @@ inputs = {
     project = "capybara-prod-427207" 
     zone = "europe-west4-c"
     machine_type = "e2-medium"
-    helm_repo = "https://docker.capybara.pp.ua/artifactory/api/helm/helm-gogs-local"
+    helm_repo = "https://docker.capybara.pp.ua:443/artifactory/helm-gogs-local/"
 }
