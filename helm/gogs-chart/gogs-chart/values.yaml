@@ -46,8 +46,13 @@ securityContext: {}
 
 service:
   type: LoadBalancer
-  port: 80
-  targetPort: 3000
+  ports:
+    - name: http
+      port: 80
+      targetPort: 3000
+    - name: https
+      port: 443
+      targetPort: 3000
   sessionAffinity: ClientIP
   env:
     - name: MYSQL_DATABASE
@@ -66,17 +71,15 @@ ingress:
   annotations: 
     kubernetes.io/ingress.global-static-ip-name: "ip-address"
     networking.gke.io/managed-certificates: "gogs-dev"
-    #networking.gke.io/managed-certificates: "example-certificate"
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: dev-gogs.capybara.pp.ua #TODO needs to be checked 
+    - host: dev-gogs.capybara.pp.ua
       paths:
         - path: /
           pathType: ImplementationSpecific
-  tls: []
-service:
-  port: 80
+  tls:
+    - secretName: dev-gogs-tls
+      hosts:
+        - dev-gogs.capybara.pp.ua
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
