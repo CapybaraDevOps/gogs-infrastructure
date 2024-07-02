@@ -1,7 +1,5 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "gogsapp.fullname" . -}}
-{{- $svcPortHttp := .Values.service.ports | first | .port -}}
-{{- $svcPortHttps := .Values.service.ports | last | .port -}}
 {{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
   {{- if not (hasKey .Values.ingress.annotations "kubernetes.io/ingress.class") }}
   {{- $_ := set .Values.ingress.annotations "kubernetes.io/ingress.class" .Values.ingress.className}}
@@ -48,15 +46,19 @@ spec:
             pathType: {{ .pathType }}
             {{- end }}
             backend:
-              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
               service:
                 name: {{ $fullName }}
                 port:
-                  number: {{ $svcPortHttp }}
-              {{- else }}
-              serviceName: {{ $fullName }}
-              servicePort: {{ $svcPortHttp }}
-              {{- end }}
+                  name: http
+          - path: {{ .path }}
+            {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
+            pathType: {{ .pathType }}
+            {{- end }}
+            backend:
+              service:
+                name: {{ $fullName }}
+                port:
+                  name: https
           {{- end }}
     {{- end }}
 {{- end }}
