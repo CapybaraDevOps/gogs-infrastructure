@@ -71,3 +71,11 @@ variable "gogs_build_tag" {
   description = "Gogs image tag to pull"
   type = string
 }
+variable "port_number" {
+  description = "Port number for helm"
+  default     = "80"
+}
+variable "service_port_number" {
+  description = "Service Port number for helm"
+  default     = "3"
+}

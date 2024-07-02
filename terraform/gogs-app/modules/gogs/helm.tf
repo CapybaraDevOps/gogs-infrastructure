@@ -66,4 +66,12 @@ resource "helm_release" "gogs-app" {
     name = "mysql.auth.database"
     value = "${var.mysql_db_name}"
   }
+  set {
+    name = "spec.ports[0].port"
+    value = 80
+  }
+  set {
+    name = "spec.ports[0].targetPort"
+    value = 3000
+  }
 }
