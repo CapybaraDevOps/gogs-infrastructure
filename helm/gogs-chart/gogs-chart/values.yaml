@@ -48,12 +48,10 @@ service:
   type: LoadBalancer
   ports:
     - name: http
-      port:
-        number: 80
+      port: 80
       targetPort: 3000
     - name: https
-      port: 
-        number: 443
+      port: 443
       targetPort: 3000
   sessionAffinity: ClientIP
   env:
