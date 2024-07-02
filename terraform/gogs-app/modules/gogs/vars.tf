@@ -75,7 +75,7 @@ variable "port_number" {
   description = "Port number for helm"
   default     = "80"
 }
-variable "service_port_number" {
+variable "target_port_number" {
   description = "Service Port number for helm"
-  default     = "3"
+  default     = "3000"
 }

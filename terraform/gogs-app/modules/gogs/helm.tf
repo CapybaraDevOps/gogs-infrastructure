@@ -68,10 +68,10 @@ resource "helm_release" "gogs-app" {
   }
   set {
     name = "spec.ports[0].port"
-    value = 80
+    value = "${var.port_number}"
   }
   set {
     name = "spec.ports[0].targetPort"
-    value = 3000
+    value = "${var.target_port_number}"
   }
 }
