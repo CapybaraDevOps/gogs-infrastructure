@@ -77,5 +77,5 @@ variable "port_number" {
 }
 variable "target_port_number" {
   description = "Service Port number for helm"
-  default     = "3000"
+  default     = "3001"
 }
