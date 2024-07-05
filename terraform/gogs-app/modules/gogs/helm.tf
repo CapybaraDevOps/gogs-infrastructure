@@ -67,11 +67,27 @@ resource "helm_release" "gogs-app" {
     value = "${var.mysql_db_name}"
   }
   set {
-    name = "service.port"
-    value = "${var.port_number}"
+    name = "service.ports[0].name"
+    value = "http"
   }
   set {
-    name = "service.targetPort"
-    value = "${var.target_port_number}"
+    name = "service.ports[0].port"
+    value = 80
+  }
+  set {
+    name = "service.ports[0].targetPort"
+    value = 3000
+  }  
+  set {
+    name = "service.ports[1].name"
+    value = "https"
+  }
+  set {
+    name = "service.ports[1].port"
+    value = 443
+  }
+  set {
+    name = "service.ports[1].targetPort"
+    value = 3000
   }
 }
