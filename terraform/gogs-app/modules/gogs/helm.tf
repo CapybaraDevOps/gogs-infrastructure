@@ -9,31 +9,31 @@ resource "helm_release" "gogs-app" {
   repository_password = var.jfrog_password
 
   set {
-    name = "service.ports[0].name"
+    name = "spec.ports[0].name"
     value = "http"
   }
   set {
-    name = "service.ports[0].port"
+    name = "spec.ports[0].port"
     value = 80
   }
   set {
-    name = "service.ports[0].targetPort"
+    name = "spec.ports[0].targetPort"
     value = 3000
   }
   set {
-    name = "service.ports[1].name"
+    name = "spec.ports[1].name"
     value = "https"
   }
   set {
-    name = "service.ports[1].port"
+    name = "spec.ports[1].port"
     value = 443
   }
   set {
-    name = "service.ports[1].targetPort"
+    name = "spec.ports[1].targetPort"
     value = 3000
   }
   set {
-    name = "service.targetPort"
+    name = "spec.targetPort"
     value = 3000
   }
   set {
