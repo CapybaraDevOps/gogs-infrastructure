@@ -9,10 +9,37 @@ resource "helm_release" "gogs-app" {
   repository_password = var.jfrog_password
 
   set {
+    name = "service.ports[0].name"
+    value = "http"
+  }
+  set {
+    name = "service.ports[0].port"
+    value = 80
+  }
+  set {
+    name = "service.ports[0].targetPort"
+    value = 3000
+  }
+  set {
+    name = "service.ports[1].name"
+    value = "https"
+  }
+  set {
+    name = "service.ports[1].port"
+    value = 443
+  }
+  set {
+    name = "service.ports[1].targetPort"
+    value = 3000
+  }
+  set {
+    name = "service.targetPort"
+    value = 3000
+  }
+  set {
     name = "image.registry"
     value = "${var.jfrog_registry}"
   }
-
   set {
     name = "image.repository"
     value = var.jfrog_repository
@@ -65,33 +92,5 @@ resource "helm_release" "gogs-app" {
   set {
     name = "mysql.auth.database"
     value = "${var.mysql_db_name}"
-  }
-  set {
-    name = "service.ports[0].name"
-    value = "http"
-  }
-  set {
-    name = "service.ports[0].port"
-    value = 80
-  }
-  set {
-    name = "service.ports[0].targetPort"
-    value = 3000
-  }  
-  set {
-    name = "service.ports[1].name"
-    value = "https"
-  }
-  set {
-    name = "service.ports[1].port"
-    value = 443
-  }
-  set {
-    name = "service.ports[1].targetPort"
-    value = 3000
-  }
-  set {
-    name = "service.targetPort"
-    value = 3000
   }
 }
