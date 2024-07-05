@@ -33,8 +33,12 @@ resource "helm_release" "gogs-app" {
     value = 3000
   }
   set {
-    name = "spec.targetPort"
+    name = "service.targetPort"
     value = 3000
+  }
+  set {
+    name = "service.port"
+    value = 80
   }
   set {
     name = "image.registry"
