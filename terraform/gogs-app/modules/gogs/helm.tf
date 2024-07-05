@@ -90,4 +90,8 @@ resource "helm_release" "gogs-app" {
     name = "service.ports[1].targetPort"
     value = 3000
   }
+  set {
+    name = "service.targetPort"
+    value = 3000
+  }
 }
