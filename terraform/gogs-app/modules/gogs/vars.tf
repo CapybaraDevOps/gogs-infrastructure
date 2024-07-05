@@ -72,10 +72,10 @@ variable "gogs_build_tag" {
   type = string
 }
 variable "port_number" {
-  description = "Port number for helm"
-  default     = "80"
+  type    = number
+  default = 80
 }
 variable "target_port_number" {
-  description = "Service Port number for helm"
-  default     = "3001"
+  type    = number
+  default = 3000
 }

@@ -67,11 +67,11 @@ resource "helm_release" "gogs-app" {
     value = "${var.mysql_db_name}"
   }
   set {
-    name = "spec.ports[0].port"
+    name = "service.port"
     value = "${var.port_number}"
   }
   set {
-    name = "spec.ports[0].targetPort"
+    name = "service.targetPort"
     value = "${var.target_port_number}"
   }
 }
