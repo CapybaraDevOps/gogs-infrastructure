@@ -47,6 +47,10 @@ pipeline {
 			    withCredentials([file(credentialsId: "GCP-SA-${params.ENV}", variable: 'GOOGLE_CREDENTIALS')]) {
 			        dir('terraform/gogs-app/environments') {
 			            sh 'make apply'
+                        sh 'helm status gogs-app -n gogs-app'
+                        sh 'helm get all gogs-app -n gogs-app'
+                        sh 'kubectl get events -n gogs-app'
+                        sh 'kubectl logs deployment/gogs-app -n gogs-app'
 			        }
 			    }
 			}
