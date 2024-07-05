@@ -5,11 +5,11 @@ metadata:
   labels:
     {{- include "gogsapp.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.service.type }}
-  sessionAffinity: {{ .Values.service.sessionAffinity }}
+  type: {{ .Values.service.type | default "ClusterIP" }}
+  sessionAffinity: {{ .Values.service.sessionAffinity | default "None" }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: {{ .Values.service.targetPort }}
+    - port: {{ .Values.service.port | default 80 }}
+      targetPort: {{ .Values.service.targetPort | default 3000 }}
       protocol: TCP
       name: http
   selector:
