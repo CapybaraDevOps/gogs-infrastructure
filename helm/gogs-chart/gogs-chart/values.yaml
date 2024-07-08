@@ -78,7 +78,8 @@ ingress:
           pathType: ImplementationSpecific
           backend:
             service:
-              port: 80
+              port:
+                number: 80
   tls:
     - secretName: dev-01-gogs-tls
       hosts:
