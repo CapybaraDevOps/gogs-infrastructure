@@ -31,7 +31,8 @@ serviceAccount:
   name: ""
 
 podAnnotations: {}
-podLabels: {}
+podLabels: 
+  - name: clusteripname 
 
 podSecurityContext: {}
   # fsGroup: 2000
