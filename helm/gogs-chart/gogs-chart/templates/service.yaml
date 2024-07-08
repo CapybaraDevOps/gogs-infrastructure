@@ -13,4 +13,4 @@ spec:
       protocol: TCP
 
   selector:
-    {{- include "gogsapp.selectorLabels" . | nindent 4 }}
+    name: clusteripname
