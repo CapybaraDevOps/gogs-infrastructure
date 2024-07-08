@@ -73,7 +73,7 @@ variable "gogs_build_tag" {
 }
 variable "port_number" {
   type    = number
-  default = 80
+  default = 443
 }
 variable "target_port_number" {
   type    = number
