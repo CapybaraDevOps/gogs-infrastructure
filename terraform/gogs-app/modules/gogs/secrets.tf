@@ -53,3 +53,11 @@ resource "kubernetes_secret" "gogs_https_cert_key" {
 
   type = "kubernetes.io/tls"
 }
+
+resource "google_compute_managed_ssl_certificate" "managed_ssl_cert" {
+  name = "dev-01-gogs-tls-01"
+
+  managed {
+    domains = ["${var.env}.capybara.pp.ua."]
+  }
+}
