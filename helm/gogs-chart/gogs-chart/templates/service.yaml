@@ -5,12 +5,13 @@ metadata:
   labels:
     {{- include "gogsapp.labels" . | nindent 4 }}
 spec:
-  type: {{ .Values.service.type | default "ClusterIP" }}
+  type: {{ .Values.service.type | default "NodePort" }}
   sessionAffinity: {{ .Values.service.sessionAffinity | default "None" }}
   ports:
     - port: {{ .Values.service.port | default 80 }}
       targetPort: {{ .Values.service.targetPort | default 3000 }}
       protocol: TCP
       name: http
+      nodePort: {{ .Values.service.nodePort | default 30005 }}
   selector:
     {{- include "gogsapp.selectorLabels" . | nindent 4 }}
