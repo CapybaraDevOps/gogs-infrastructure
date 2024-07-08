@@ -11,6 +11,6 @@ spec:
     - port: {{ .Values.service.port | default 80 }}
       targetPort: {{ .Values.service.targetPort | default 3000 }}
       protocol: TCP
-
+      name: http
   selector:
-    name: {{ include "gogsapp.fullname" . }}
+    {{- include "gogsapp.selectorLabels" . | nindent 4 }}
