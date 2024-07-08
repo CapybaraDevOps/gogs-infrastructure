@@ -76,8 +76,7 @@ ingress:
       paths:
         - path: /
           pathType: ImplementationSpecific
-  tls: true
-    extraTls:
+  tls:
     - secretName: dev-01-gogs-tls
       hosts:
         - dev-gogs.capybara.pp.ua
