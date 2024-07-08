@@ -50,7 +50,7 @@ service:
   name: gogs-app-gogsapp
   ports:
     - name: http
-      port: 443
+      port: 3000
       targetPort: 3000
   sessionAffinity: ClientIP
   env:
@@ -73,9 +73,9 @@ ingress:
   hosts:
     - host: dev-gogs.capybara.pp.ua
       paths:
-        - path: /
+        - path: /*
           pathType: ImplementationSpecific
-          port: 443
+          port: 3000
   tls:
     - secretName: dev-01-gogs-tls
       hosts:
