@@ -46,6 +46,7 @@ securityContext: {}
 
 service:
   type: ClusterIP
+  name: ClusterIpName
   ports:
     - name: http
       port: 443
