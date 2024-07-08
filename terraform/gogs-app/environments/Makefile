@@ -7,5 +7,4 @@ plan: init
 apply: init
 	terragrunt apply --terragrunt-working-dir ${WORK_DIR}
 destroy: init
-	terragrunt destroy --target google_container_cluster.my_cluster --terragrunt-working-dir ${WORK_DIR}
-	terragrunt destroy --terragrunt-working-dir ${WORK_DIR}
+	terragrunt destroy --target helm_release.gogs-app --terragrunt-working-dir ${WORK_DIR}
