@@ -21,7 +21,7 @@ apiVersion: extensions/v1beta1
 {{- end }}
 kind: Ingress
 metadata:
-  name: Ingress
+  name: ingress
   labels:
     {{- include "gogsapp.labels" . | nindent 4 }}
   {{- with .Values.ingress.annotations }}
@@ -54,7 +54,7 @@ spec:
             {{- end }}
             backend:
               service:
-                name: ClusterIpName
+                name: clusteripname
                 port:
                   number: {{ .port }} 
           {{- end }}
