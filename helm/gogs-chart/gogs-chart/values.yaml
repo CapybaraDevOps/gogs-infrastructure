@@ -32,7 +32,7 @@ serviceAccount:
 
 podAnnotations: {}
 podLabels: 
-  - name: clusteripname 
+  - name: gogs-app-gogsapp
 
 podSecurityContext: {}
   # fsGroup: 2000
@@ -47,7 +47,7 @@ securityContext: {}
 
 service:
   type: NodePort
-  name: clusteripname
+  name: gogs-app-gogsapp
   ports:
     - name: http
       port: 443
