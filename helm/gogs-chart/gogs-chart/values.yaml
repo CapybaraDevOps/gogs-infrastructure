@@ -32,7 +32,7 @@ serviceAccount:
 
 podAnnotations: {}
 podLabels: 
-  - name: gogs-app-gogsapp
+  name: gogs-app-gogsapp
 
 podSecurityContext: {}
   # fsGroup: 2000
