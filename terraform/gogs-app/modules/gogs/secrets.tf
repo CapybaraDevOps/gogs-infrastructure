@@ -47,17 +47,9 @@ resource "kubernetes_secret" "gogs_https_cert_key" {
   }
 
   data = {
-    "tls.crt" = base64encode(data.google_secret_manager_secret_version.tls_cert.secret_data)
-    "tls.key" = base64encode(data.google_secret_manager_secret_version.tls_key.secret_data)
+    "tls.crt" = jsonencode(base64encode(data.google_secret_manager_secret_version.tls_cert.secret_data))
+    "tls.key" = jsonencode(base64encode(data.google_secret_manager_secret_version.tls_key.secret_data))
   }
 
   type = "kubernetes.io/tls"
-}
-
-resource "google_compute_managed_ssl_certificate" "managed_ssl_cert" {
-  name = "dev-01-gogs-tls-01"
-
-  managed {
-    domains = ["${var.env}.capybara.pp.ua."]
-  }
 }
