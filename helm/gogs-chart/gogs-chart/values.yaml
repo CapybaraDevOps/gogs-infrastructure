@@ -74,7 +74,7 @@ ingress:
       paths:
         - path: /
           pathType: ImplementationSpecific
-          port: 30005
+          port: 3000
   tls:
     - secretName: dev-01-gogs-tls
       hosts:
