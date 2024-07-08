@@ -45,11 +45,8 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  type: LoadBalancer
+  type: NodePort
   ports:
-    - name: http
-      port: 80
-      targetPort: 3000
     - name: https
       port: 443
       targetPort: 3000
@@ -76,7 +73,7 @@ ingress:
       paths:
         - path: /
           pathType: ImplementationSpecific
-          port: 80
+          port: 443
   tls:
     - secretName: dev-01-gogs-tls
       hosts:
