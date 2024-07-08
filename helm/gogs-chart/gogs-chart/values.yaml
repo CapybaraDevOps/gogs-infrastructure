@@ -49,6 +49,7 @@ service:
   ports:
     - name: https
       port: 443
+      nodePort: 30005
       targetPort: 3000
   sessionAffinity: ClientIP
   env:
@@ -73,7 +74,7 @@ ingress:
       paths:
         - path: /
           pathType: ImplementationSpecific
-          port: 443
+          port: 30005
   tls:
     - secretName: dev-01-gogs-tls
       hosts:
