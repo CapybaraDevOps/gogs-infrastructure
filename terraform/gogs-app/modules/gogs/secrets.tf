@@ -42,7 +42,7 @@ data "google_secret_manager_secret_version" "tls_key" {
 
 resource "kubernetes_secret" "gogs_https_cert_key" {
   metadata {
-    name = "${var.env}-01-gogs-tls"
+    name = "${var.env}-gogs-tls"
     namespace = kubernetes_namespace.gogs-app.metadata[0].name
   }
 
