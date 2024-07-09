@@ -50,8 +50,8 @@ service:
   name: gogs-app-gogsapp
   ports:
     - name: http
-      port: 3000
-      targetPort: 443
+      port: 443
+      targetPort: 3000
   sessionAffinity: ClientIP
   env:
     - name: MYSQL_DATABASE
