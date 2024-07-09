@@ -71,11 +71,3 @@ variable "gogs_build_tag" {
   description = "Gogs image tag to pull"
   type = string
 }
-variable "port_number" {
-  type    = number
-  default = 443
-}
-variable "target_port_number" {
-  type    = number
-  default = 3000
-}
