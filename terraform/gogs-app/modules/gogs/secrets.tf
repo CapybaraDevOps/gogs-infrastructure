@@ -46,9 +46,9 @@ resource "kubernetes_secret" "gogs_https_cert_key" {
     namespace = kubernetes_namespace.gogs-app.metadata[0].name
   }
 
-  data = {
-    "tls.crt" = jsonencode(base64encode(data.google_secret_manager_secret_version.tls_cert.secret_data))
-    "tls.key" = jsonencode(base64encode(data.google_secret_manager_secret_version.tls_key.secret_data))
+  data = { #https://github.com/hashicorp/terraform-provider-kubernetes/issues/478
+    "tls.crt" = data.google_secret_manager_secret_version.tls_cert.secret_data
+    "tls.key" = data.google_secret_manager_secret_version.tls_key.secret_data
   }
 
   type = "kubernetes.io/tls"
