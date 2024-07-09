@@ -50,7 +50,7 @@ service:
   name: gogs-app-gogsapp
   ports:
     - name: http
-      port: 3000
+      port: 80
       targetPort: 3000
   sessionAffinity: ClientIP
   env:
@@ -76,7 +76,7 @@ ingress:
       paths:
         - path: /*
           pathType: ImplementationSpecific
-          port: 3000
+          port: 80
   tls:
     - secretName: dev-01-gogs-tls
       hosts:
@@ -97,13 +97,12 @@ resources: {}
 livenessProbe:
   httpGet:
     path: /
-    port: 3000
-    scheme: HTTP
+    port: http
 readinessProbe:
   httpGet:
     path: /
-    port: 3000
-    scheme: HTTP
+    port: http
+
 
 autoscaling:
   enabled: false

@@ -14,7 +14,7 @@ resource "helm_release" "gogs-app" {
   }
   set {
     name = "service.port"
-    value = 3000
+    value = 80
   }
   set {
     name = "image.registry"
