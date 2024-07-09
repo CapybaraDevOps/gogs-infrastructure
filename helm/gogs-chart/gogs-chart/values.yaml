@@ -74,7 +74,7 @@ ingress:
   hosts:
     - host: gogs-dev.capybara.pp.ua
       paths:
-        - path: /
+        - path: /*
           pathType: ImplementationSpecific
           port: 3000
   tls:
