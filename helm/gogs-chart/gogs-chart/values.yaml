@@ -95,12 +95,10 @@ resources: {}
   #   memory: 128Mi
 
 livenessProbe:
-  httpGet:
-    path: /
+  tcpSocket:
     port: 3000
 readinessProbe:
-  httpGet:
-    path: /
+  tcpSocket:
     port: 3000
 
 
