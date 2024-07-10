@@ -94,14 +94,14 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
-# livenessProbe:
-#   httpGet:
-#     path: /healthz
-#     port: 3000
-# readinessProbe:
-#   httpGet:
-#     path: /healthz
-#     port: 3000
+livenessProbe:
+  httpGet:
+    path: /healthcheck
+    port: 80
+readinessProbe:
+  httpGet:
+    path: /healthcheck
+    port: 80
 
 
 autoscaling:
@@ -149,20 +149,20 @@ mysql:
   fullnameOverride: gogs-mysql
   namespaceOverride: "gogs-app"
 
-nginx:
-  service:
-    type: NodePort
-    port: 80
+# nginx:
+#   service:
+#     type: NodePort
+#     port: 80
 
-  ingress:
-    enabled: false
+#   ingress:
+#     enabled: false
 
-  extraVolumeMounts:
-    - name: nginx-healthcheck-config
-      mountPath: /opt/bitnami/nginx/conf/server_blocks/
-  extraVolumes:
-    - name: nginx-healthcheck-config
-      configMap:
-        name: nginx-healthcheck-config
+#   extraVolumeMounts:
+#     - name: nginx-healthcheck-config
+#       mountPath: /opt/bitnami/nginx/conf/server_blocks/
+#   extraVolumes:
+#     - name: nginx-healthcheck-config
+#       configMap:
+#         name: nginx-healthcheck-config
 
 
