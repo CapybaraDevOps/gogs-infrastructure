@@ -148,21 +148,3 @@ mysql:
         existingClaim: ""
   fullnameOverride: gogs-mysql
   namespaceOverride: "gogs-app"
-
-# nginx:
-#   service:
-#     type: NodePort
-#     port: 80
-
-#   ingress:
-#     enabled: false
-
-#   extraVolumeMounts:
-#     - name: nginx-healthcheck-config
-#       mountPath: /opt/bitnami/nginx/conf/server_blocks/
-#   extraVolumes:
-#     - name: nginx-healthcheck-config
-#       configMap:
-#         name: nginx-healthcheck-config
-
-
