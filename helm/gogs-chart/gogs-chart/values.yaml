@@ -96,11 +96,11 @@ resources: {}
 livenessProbe:
   httpGet:
     path: /
-    port: 80
+    port: 3000
 readinessProbe:
   httpGet:
     path: /
-    port: 80
+    port: 3000
 
 
 autoscaling:
