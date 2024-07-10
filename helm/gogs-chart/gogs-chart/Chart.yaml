@@ -27,4 +27,8 @@ dependencies:
   - name: mysql
     version: 11.1.2
     repository: "@bitnami"
+  
     
+  - name: nginx
+    version: 9.3.3
+    repository: "https://charts.bitnami.com/bitnami"
