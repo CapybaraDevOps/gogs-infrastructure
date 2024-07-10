@@ -94,14 +94,14 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
-livenessProbe:
-  httpGet:
-    path: /healthz
-    port: 3000
-readinessProbe:
-  httpGet:
-    path: /healthz
-    port: 3000
+# livenessProbe:
+#   httpGet:
+#     path: /healthz
+#     port: 3000
+# readinessProbe:
+#   httpGet:
+#     path: /healthz
+#     port: 3000
 
 
 autoscaling:
