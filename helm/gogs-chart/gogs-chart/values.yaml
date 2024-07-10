@@ -95,11 +95,11 @@ resources: {}
 
 livenessProbe:
   httpGet:
-    path: /healthcheck
+    path: /
     port: 80
 readinessProbe:
   httpGet:
-    path: /healthcheck
+    path: /
     port: 80
 
 
