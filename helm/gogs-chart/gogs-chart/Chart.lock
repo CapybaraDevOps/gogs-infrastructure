@@ -2,8 +2,5 @@ dependencies:
 - name: mysql
   repository: https://charts.bitnami.com/bitnami
   version: 11.1.2
-- name: nginx
-  repository: https://charts.bitnami.com/bitnami
-  version: 12.0.1
-digest: sha256:f9012dc3c633095471fcc8a35dfda6ae7a332ce13e1335f0d13c2619d45cada9
-generated: "2024-07-10T13:32:03.8717698+03:00"
+digest: sha256:8aafecb8c612d5ed7c97c1b1bf7ffbdf069187d3bdf0212797db7be5825119ba
+generated: "2024-07-10T15:59:59.80479+03:00"
