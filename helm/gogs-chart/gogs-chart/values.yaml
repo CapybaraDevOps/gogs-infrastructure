@@ -70,7 +70,6 @@ ingress:
   annotations: 
     kubernetes.io/ingress.class: "gce"
     kubernetes.io/ingress.global-static-ip-name: "gogs-dev-ip"
-    #networking.gke.io/managed-certificates: "dev-01-gogs-tls-01"
   hosts:
     - host: gogs-dev.capybara.pp.ua
       paths:
