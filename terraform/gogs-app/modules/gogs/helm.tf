@@ -4,7 +4,7 @@ resource "helm_release" "gogs-app" {
   chart               = "gogsapp"
   namespace           = kubernetes_namespace.gogs-app.metadata[0].name
   depends_on          = [kubernetes_namespace.gogs-app]
-  timeout             = 200
+  timeout             = 660
   repository_username = var.jfrog_username
   repository_password = var.jfrog_password
 
