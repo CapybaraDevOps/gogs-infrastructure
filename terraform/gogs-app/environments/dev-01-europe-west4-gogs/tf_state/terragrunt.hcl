@@ -21,5 +21,5 @@ terraform {
 inputs = {
     env = "dev-01"
     region = "europe-west4"
-    project = "capybara-dev-42069" 
+    project = "capybara-dev-42069"
 }
