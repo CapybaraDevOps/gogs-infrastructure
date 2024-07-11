@@ -27,3 +27,8 @@ make init
 ``
 make apply
 ``
+
+5. Healtcheck path for Ingress GKE Exposing Backend Service
+``
+/healthcheck
+``
