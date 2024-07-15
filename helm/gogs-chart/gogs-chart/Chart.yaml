@@ -27,4 +27,3 @@ dependencies:
   - name: mysql
     version: 11.1.2
     repository: "@bitnami"
-    

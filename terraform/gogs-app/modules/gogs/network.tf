@@ -10,3 +10,9 @@ resource "google_compute_subnetwork" "gogs-subnetwork" {
   private_ip_google_access = true
   network                  = google_compute_network.gogs-network.id
 }
+
+resource "google_compute_global_address" "ip_address" {
+  name = "gogs-dev-ip"
+  #address_type = "EXTERNAL"
+  #region       = "${var.region}"
+}
