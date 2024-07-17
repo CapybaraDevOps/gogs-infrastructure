@@ -1,3 +1,4 @@
+ENV?=stage-01
 GOGS_ENV?=stage-01-europe-west4-gogs
 WORK_DIR=${GOGS_ENV}/gogs 
 init:
