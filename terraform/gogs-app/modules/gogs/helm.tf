@@ -13,6 +13,10 @@ resource "helm_release" "gogs-app" {
     value = var.env
   }
   set {
+    name  = "ingress.env[0].name"
+    value = "envd"
+  }
+  set {
     name  = "service.targetPort"
     value = 3000
   }

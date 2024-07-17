@@ -25,22 +25,20 @@ metadata:
   labels:
     {{- include "gogsapp.labels" . | nindent 4 }}
   annotations:
-    {{- range $key, $value := .Values.ingress.annotations }}
-    {{ $key }}: {{ replace "ENV" $.Values.env $value }}
-    {{- end }}
+    {{- toYaml .Values.ingress.annotations | nindent 4 }}
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   tls:
     {{- range .Values.ingress.tls }}
     - hosts:
         {{- range .hosts }}
-        - {{ replace "ENV" $.Values.env . | quote }}
+        - {{ . | quote }}
         {{- end }}
-      secretName: {{ replace "ENV" $.Values.env .secretName }}
+      secretName: {{ .secretName }}
     {{- end }}
   rules:
     {{- range .Values.ingress.hosts }}
-    - host: {{ replace "ENV" $.Values.env .host | quote }}
+    - host: {{ .host | quote }}
       http:
         paths:
           {{- range .paths }}
