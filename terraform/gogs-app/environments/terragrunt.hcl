@@ -1,7 +1,7 @@
 remote_state {
   backend = "gcs"
 config = {
-    bucket = "${get_env("TF_VAR_GOGS_ENV", "prod-01-europe-west4-gogs")}-state-bucket"
+    bucket = "${get_env("TF_VAR_GOGS_ENV", "dev-01-europe-west4-gogs")}-state-bucket"
     prefix = "terraform/gogs-state"
   }
 generate = {
