@@ -35,7 +35,7 @@ spec:
   {{- end }}
   rules:
     {{- range .Values.ingress.hosts }}
-    - host: {{ printf "%s" (regexReplaceAll "ENV" .host $.Values.env) | quote }}
+    - host: {{ printf "%s" (regexReplaceAll "01-" (regexReplaceAll "ENV" . $.Values.env) "") | quote }}
       http:
         paths:
           {{- range .paths }}
