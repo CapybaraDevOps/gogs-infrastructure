@@ -12,7 +12,7 @@ resource "google_compute_subnetwork" "gogs-subnetwork" {
 }
 
 resource "google_compute_global_address" "ip_address" {
-  name = "gogs-dev-ip"
+  name = "gogs-${var.env}-ip"
   #address_type = "EXTERNAL"
   #region       = "${var.region}"
 }

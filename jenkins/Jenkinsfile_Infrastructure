@@ -25,6 +25,7 @@ pipeline {
                     def environmentGOGS = "${params.ENV}-${params.ENV_VARIABLE}-${params.REGION}-${params.ZONE}-${params.PROJECT_NAME}"
                     echo "Selected environment GOGS: ${environmentGOGS}"
 					env.GOGS_ENV = environmentGOGS
+                    env.TF_VAR_env = params.ENV
                 }
                 withCredentials([string(credentialsId: 'docker-jfrog-password', variable: 'JFROG_PASSWORD')]) {
                     script {
