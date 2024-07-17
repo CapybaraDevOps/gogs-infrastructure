@@ -4,6 +4,7 @@
 
 replicaCount: 2
 namespace: "gogs-app"
+env: ""
 
 image:
   registry: docker.io
@@ -80,8 +81,6 @@ ingress:
     - secretName: "ENV-01-gogs-tls"
       hosts:
         - "gogs-ENV.capybara.pp.ua"
-
-env: "stage"
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
