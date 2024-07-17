@@ -4,7 +4,6 @@
 
 replicaCount: 2
 namespace: "gogs-app"
-env: ""
 
 image:
   registry: docker.io
@@ -70,17 +69,19 @@ ingress:
   className: "gce"
   annotations: 
     kubernetes.io/ingress.class: "gce"
-    kubernetes.io/ingress.global-static-ip-name: "gogs-{{ .Values.env }}-ip"
+    kubernetes.io/ingress.global-static-ip-name: "gogs-stage-ip"
   hosts:
-    - host: "gogs-{{ .Values.env }}.capybara.pp.ua"
+    - host: gogs-stage.capybara.pp.ua
       paths:
         - path: /*
           pathType: ImplementationSpecific
           port: 3000
   tls:
-    - secretName: "{{ .Values.env }}-01-gogs-tls"
+    - secretName: stage-01-gogs-tls
       hosts:
-        - "gogs-{{ .Values.env }}.capybara.pp.ua"
+        - gogs-stage.capybara.pp.ua
+
+env: "stage"
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
