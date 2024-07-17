@@ -70,15 +70,14 @@ ingress:
   className: "gce"
   annotations: 
     kubernetes.io/ingress.class: "gce"
-    kubernetes.io/ingress.global-static-ip-name: "gogs-ENV-ip"  # ENV will be replaced
+    kubernetes.io/ingress.global-static-ip-name: "gogs-ENV-ip"
   hosts:
-    - host: "gogs-ENV.capybara.pp.ua"  # ENV will be replaced
-      paths:
+    - host: "gogs-ENV.capybara.pp.ua"
         - path: "/"
           pathType: ImplementationSpecific
           port: 3000
   tls:
-    - secretName: "ENV-01-gogs-tls"  # ENV will be replaced
+    - secretName: "ENV-01-gogs-tls"
       hosts:
         - "gogs-ENV.capybara.pp.ua"
 
