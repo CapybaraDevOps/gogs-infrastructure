@@ -1,17 +1,8 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "gogsapp.fullname" . -}}
-{{- $httpPort := 3000 -}}
-{{- $svcPort := .Values.service.ports | first | default "http" -}}
-{{- range .Values.service.ports }}
-  {{- if eq .name "http" }}
-    {{- $httpPort := .targetPort -}}
-  {{- end }}
-{{- end }}
-{{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
-  {{- if not (hasKey .Values.ingress.annotations "kubernetes.io/ingress.class") }}
-  {{- $_ := set .Values.ingress.annotations "kubernetes.io/ingress.class" .Values.ingress.className}}
-  {{- end }}
-{{- end }}
+{{- $svcPort := .Values.service.ports | first | default dict -}}
+{{- $httpPort := $svcPort.targetPort | default 3000 -}}
+
 {{- if semverCompare ">=1.19-0" .Capabilities.KubeVersion.GitVersion -}}
 apiVersion: networking.k8s.io/v1
 {{- else if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
@@ -21,42 +12,47 @@ apiVersion: extensions/v1beta1
 {{- end }}
 kind: Ingress
 metadata:
-  name: {{ $fullName }} 
+  name: {{ $fullName }}
   labels:
     {{- include "gogsapp.labels" . | nindent 4 }}
-  {{- with .Values.ingress.annotations }}
   annotations:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
+    {{- range $key, $value := .Values.ingress.annotations }}
+    {{ $key }}: {{ replace "ENV" $.Values.env $value | quote }}
+    {{- end }}
 spec:
-  {{- if .Values.ingress.className }} 
-  ingressClassName: {{ .Values.ingress.className }}  
+  {{- if .Values.ingress.className }}
+  ingressClassName: {{ .Values.ingress.className }}
   {{- end }}
   {{- if .Values.ingress.tls }}
   tls:
     {{- range .Values.ingress.tls }}
     - hosts:
         {{- range .hosts }}
-        - {{ . | quote }}
+        - {{ replace "ENV" $.Values.env . | quote }}
         {{- end }}
-      secretName: {{ .secretName }}
+      secretName: {{ replace "ENV" $.Values.env .secretName | quote }}
     {{- end }}
   {{- end }}
   rules:
     {{- range .Values.ingress.hosts }}
-    - host: {{ .host | quote }}
+    - host: {{ replace "ENV" $.Values.env .host | quote }}
       http:
         paths:
           {{- range .paths }}
           - path: {{ .path }}
-            {{- if .pathType }}  
+            {{- if .pathType }}
             pathType: {{ .pathType }}
             {{- end }}
             backend:
+              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
               service:
-                name: {{ $fullName }}  
-                port:
-                  number: {{ .port }} 
+                name: {{ $fullName }}
+                port: 
+                  number: {{ .port }}
+              {{- else }}
+              serviceName: {{ $fullName }}
+              servicePort: {{ .port }}
+              {{- end }}
           {{- end }}
     {{- end }}
 {{- end }}
