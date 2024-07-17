@@ -1,17 +1,14 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "gogsapp.fullname" . -}}
-{{- $httpPort := 3000 -}}
-{{- $svcPort := .Values.service.ports | first | default "http" -}}
-{{- range .Values.service.ports }}
-  {{- if eq .name "http" }}
-    {{- $httpPort := .targetPort -}}
-  {{- end }}
-{{- end }}
+{{- $svcPort := .Values.service.ports | first | default dict -}}
+{{- $httpPort := $svcPort.targetPort | default 3000 -}}
+
 {{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
   {{- if not (hasKey .Values.ingress.annotations "kubernetes.io/ingress.class") }}
   {{- $_ := set .Values.ingress.annotations "kubernetes.io/ingress.class" .Values.ingress.className}}
   {{- end }}
 {{- end }}
+
 {{- if semverCompare ">=1.19-0" .Capabilities.KubeVersion.GitVersion -}}
 apiVersion: networking.k8s.io/v1
 {{- else if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
@@ -56,7 +53,7 @@ spec:
               service:
                 name: {{ $fullName }}  
                 port:
-                  number: {{ .port }} 
+                  number: {{ $httpPort }}
           {{- end }}
     {{- end }}
 {{- end }}
