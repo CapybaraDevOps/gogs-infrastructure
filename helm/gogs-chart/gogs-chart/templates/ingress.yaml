@@ -28,7 +28,7 @@ spec:
     {{- range .Values.ingress.tls }}
     - hosts:
         {{- range .hosts }}
-        - {{ printf "%s" (regexReplaceAll "ENV" . $.Values.env) | quote }}
+        - {{ printf "%s" (regexReplaceAll "ENV" . $.Values.env) | sed 's/01-//g' | quote }}
         {{- end }}
       secretName: {{ printf "%s" (regexReplaceAll "ENV" .secretName $.Values.env) | quote }}
     {{- end }}
