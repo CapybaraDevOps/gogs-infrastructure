@@ -73,7 +73,7 @@ ingress:
     kubernetes.io/ingress.global-static-ip-name: "gogs-ENV-ip"
   hosts:
     - host: "gogs-ENV.capybara.pp.ua"
-        - path: "/"
+        - path: /*
           pathType: ImplementationSpecific
           port: 3000
   tls:
