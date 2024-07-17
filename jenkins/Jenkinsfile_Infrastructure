@@ -4,19 +4,19 @@ pipeline {
       terraform 'terraform'
     }
 	parameters {
-        choice(name: 'ENV', choices: ['dev', 'stage', 'prod'], description: 'Deployment environment')
+        choice(name: 'ENV', choices: ['stage', 'dev', 'prod'], description: 'Deployment environment')
 		string(name: 'ENV_VARIABLE', defaultValue: '01', description: 'ENV Variable')
 		choice(name: 'REGION', choices: ['europe'], description: 'Select the region')
         choice(name: 'ZONE', choices: ['west4'], description: 'Select the zone')
         string(name: 'PROJECT_NAME', defaultValue: 'gogs', description: 'Project name')
         string(name: 'JFROG_REGISTRY', defaultValue: 'docker.capybara.pp.ua', description: 'Jfrog registry domain')
-        choice(name: 'JFROG_REPOSITORY', choices: ['dev-gogs-go-local/gogs', 'stage-gogs-go-local/gogs', 'prod-gogs-go-local/gogs'] , description: 'Jfrog registry domain')
+        choice(name: 'JFROG_REPOSITORY', choices: ['stage-gogs-go-local/gogs', 'dev-gogs-go-local/gogs', 'prod-gogs-go-local/gogs'] , description: 'Jfrog registry domain')
         string(name: 'JFROG_IMAGE_TAG', defaultValue: '126-5a0d918', description: 'Gogs image tag')
     }
     stages {
         stage('Checkout') { 
             steps {
-                git branch: 'main', url: "git@github.com:CapybaraDevOps/gogs-infrastructure.git", credentialsId: 'gitcreds'
+                git branch: 'jira-95-install-and-configure-consul-agent-on-gogs', url: "git@github.com:CapybaraDevOps/gogs-infrastructure.git", credentialsId: 'gitcreds'
             }
         }
         stage('Init and Plan'){
