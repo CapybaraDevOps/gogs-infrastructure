@@ -74,17 +74,17 @@ ingress:
   className: "gce"
   annotations: 
     kubernetes.io/ingress.class: "gce"
-    kubernetes.io/ingress.global-static-ip-name: "gogs-${envd}-ip"
+    kubernetes.io/ingress.global-static-ip-name: gogs-${envd}-ip
   hosts:
-    - host: "gogs-${envd}.capybara.pp.ua"
+    - host: gogs-${envd}.capybara.pp.ua
       paths:
-        - path: "/"
+        - path: /*
           pathType: ImplementationSpecific
           port: 3000
   tls:
-    - secretName: "${envd}-01-gogs-tls"
+    - secretName: ${envd}-01-gogs-tls
       hosts:
-        - "gogs-${envd}.capybara.pp.ua"
+        - gogs-${envd}.capybara.pp.ua
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
