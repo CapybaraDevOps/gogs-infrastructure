@@ -21,13 +21,18 @@ apiVersion: extensions/v1beta1
 {{- end }}
 kind: Ingress
 metadata:
-  name: {{ $fullName }}
+  name: {{ $fullName }} 
   labels:
     {{- include "gogsapp.labels" . | nindent 4 }}
+  {{- with .Values.ingress.annotations }}
   annotations:
-    {{- toYaml .Values.ingress.annotations | nindent 4 }}
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
-  ingressClassName: {{ .Values.ingress.className }}
+  {{- if .Values.ingress.className }} 
+  ingressClassName: {{ .Values.ingress.className }}  
+  {{- end }}
+  {{- if .Values.ingress.tls }}
   tls:
     {{- range .Values.ingress.tls }}
     - hosts:
@@ -36,6 +41,7 @@ spec:
         {{- end }}
       secretName: {{ .secretName }}
     {{- end }}
+  {{- end }}
   rules:
     {{- range .Values.ingress.hosts }}
     - host: {{ .host | quote }}
@@ -43,12 +49,14 @@ spec:
         paths:
           {{- range .paths }}
           - path: {{ .path }}
+            {{- if .pathType }}  
             pathType: {{ .pathType }}
+            {{- end }}
             backend:
               service:
-                name: {{ $fullName }}
+                name: {{ $fullName }}  
                 port:
-                  number: {{ .port }}
+                  number: {{ .port }} 
           {{- end }}
     {{- end }}
 {{- end }}
