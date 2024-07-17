@@ -4,14 +4,14 @@ pipeline {
       terraform 'terraform'
     }
 	parameters {
-        choice(name: 'ENV', choices: ['stage', 'dev', 'prod'], description: 'Deployment environment')
+        choice(name: 'ENV', choices: ['stage', 'dev', 'prod'], description: 'Deployment environment', defaultValue: 'stage')
 		string(name: 'ENV_VARIABLE', defaultValue: '01', description: 'ENV Variable')
 		choice(name: 'REGION', choices: ['europe'], description: 'Select the region')
         choice(name: 'ZONE', choices: ['west4'], description: 'Select the zone')
         string(name: 'PROJECT_NAME', defaultValue: 'gogs', description: 'Project name')
         string(name: 'JFROG_REGISTRY', defaultValue: 'docker.capybara.pp.ua', description: 'Jfrog registry domain')
         choice(name: 'JFROG_REPOSITORY', choices: ['stage-gogs-go-local/gogs', 'dev-gogs-go-local/gogs', 'prod-gogs-go-local/gogs'] , description: 'Jfrog registry domain')
-        string(name: 'JFROG_IMAGE_TAG', defaultValue: '126-5a0d918', description: 'Gogs image tag')
+        string(name: 'JFROG_IMAGE_TAG', defaultValue: '127-a45db8d', description: 'Gogs image tag')
     }
     stages {
         stage('Checkout') { 

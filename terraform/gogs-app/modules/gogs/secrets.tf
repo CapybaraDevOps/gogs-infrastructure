@@ -31,12 +31,12 @@ resource "kubernetes_secret" "gogs_admin_password" {
 }
 
 data "google_secret_manager_secret_version" "tls_cert" {
-  secret  = "${var.env}-gogs-cert"
+  secret  = "${var.env}-01-gogs-cert"
   version = "latest"
 }
 
 data "google_secret_manager_secret_version" "tls_key" {
-  secret  = "${var.env}-gogs-key"
+  secret  = "${var.env}-01-gogs-key"
   version = "latest"
 }
 
