@@ -9,6 +9,10 @@ resource "helm_release" "gogs-app" {
   repository_password = var.jfrog_password
 
   set {
+    name  = "env"
+    value = var.env
+  }
+  set {
     name  = "service.targetPort"
     value = 3000
   }
