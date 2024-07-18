@@ -13,3 +13,6 @@ destroy: init
 destroy_helm: init
 	#left for additional option to destroy only gogs-app purpose
 	terragrunt destroy --target helm_release.gogs-app --terragrunt-working-dir ${WORK_DIR}
+destroy_consul: init
+	#left for additional option to destroy only consul purpose
+	terragrunt destroy --target helm_release.consul --terragrunt-working-dir ${WORK_DIR}
