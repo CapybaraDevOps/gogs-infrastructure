@@ -27,6 +27,6 @@ inputs = {
     region = "europe-west4"
     project = "capybara-dev-42069" 
     zone = "europe-west4-c"
-    machine_type = "e2-medium"
+    machine_type = "c4-highcpu-4"
     helm_repo = "https://docker.capybara.pp.ua/artifactory/api/helm/helm-gogs-local"
 }
