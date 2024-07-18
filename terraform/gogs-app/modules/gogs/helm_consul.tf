@@ -4,6 +4,7 @@ resource "helm_release" "consul" {
   chart      = "consul"
   namespace  = kubernetes_namespace.consul.metadata[0].name
   timeout    = 420
+  depends_on = [helm_release.gogs-app]
   #version    = "1.2.0"
 
   values = [
