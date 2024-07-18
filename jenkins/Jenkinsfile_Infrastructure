@@ -34,6 +34,11 @@ pipeline {
                         env.TF_VAR_gogs_build_tag = "${JFROG_IMAGE_TAG}"
                     }
                 }
+                withCredentials([file(credentialsId: "values-v1-${params.ENV}", variable: 'VALUES')]) {
+			        dir('terraform/gogs-app/modules/gogs') { 
+			            sh 'cat $VALUES > terraform/gogs-app/modules/gogs/values-v1.yaml'
+			        }
+                }
 			    withCredentials([file(credentialsId: "GCP-SA-${params.ENV}", variable: 'GOOGLE_CREDENTIALS')]) {
 			        dir('terraform/gogs-app/environments') {
 			            sh 'make plan'
