@@ -20,11 +20,11 @@ variable "clusterName" {
 }
 variable "minNode" {
   description = "Minimum Node Count"
-  default     = "2"
+  default     = "3"
 }
 variable "maxNode" {
   description = "Maximum Node Count"
-  default     = "2"
+  default     = "4"
 }
 variable "machine_type" {
   description = "Node Instance machine type"
