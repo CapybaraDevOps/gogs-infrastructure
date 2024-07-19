@@ -4,10 +4,18 @@ resource "helm_release" "gogs-app" {
   chart               = "gogsapp"
   namespace           = kubernetes_namespace.gogs-app.metadata[0].name
   depends_on          = [kubernetes_namespace.gogs-app]
-  timeout             = 660
+  timeout             = 600
   repository_username = var.jfrog_username
   repository_password = var.jfrog_password
 
+  set {
+    name  = "env"
+    value = var.env
+  }
+  set {
+    name  = "ingress.env[0].name"
+    value = "envd"
+  }
   set {
     name  = "service.targetPort"
     value = 3000
