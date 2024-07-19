@@ -1,5 +1,5 @@
-ENV?=dev-01
-GOGS_ENV?=dev-01-europe-west4-gogs
+ENV?=prod-01
+GOGS_ENV?=prod-01-europe-west4-gogs
 WORK_DIR=${GOGS_ENV}/gogs 
 init:
 	terragrunt init --terragrunt-working-dir ${WORK_DIR}
