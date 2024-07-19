@@ -15,23 +15,6 @@ resource "kubernetes_namespace" "gogs-app" {
   }
 }
 
-resource "kubernetes_namespace" "consul" {
-  metadata {
-    annotations = {
-      name = "consul"
-    }
-
-    labels = {
-      namespace = "consul"
-    }
-    name = "consul"
-  }
-  depends_on = [google_container_node_pool.gogs_node_pool]
-  timeouts {
-    delete = "1m"
-  }
-}
-
 resource "kubernetes_secret" "gogs_docker_auth" {
   metadata {
     name      = "jfrogcred"
